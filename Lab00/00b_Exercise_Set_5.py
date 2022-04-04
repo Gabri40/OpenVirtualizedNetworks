@@ -41,14 +41,14 @@ import json
 # json_str = json.dumps(dic, sort_keys=True, indent=4)
 # print(json_str)
 
-# # 5. Write a Python program to create a new JSON file from an existing JSON
-# # file. Use the included json file ’states.json’ and create a new json file that
-# # does not contain the ’area code’ field.
-# with open("00b_resources/states.json") as json_f:
-#     states_data = json.load(json_f)
-# for i in states_data["states"]:
-#     del i["area_codes"]
-# with open("00b_resources/states_updated.json", "w") as new_f:
-#     json.dump(states_data, new_f)
-#     for i in states_data["states"]:
-#         print(i.keys())
+# 5. Write a Python program to create a new JSON file from an existing JSON
+# file. Use the included json file ’states.json’ and create a new json file that
+# does not contain the ’area code’ field.
+with open("00b_resources/states.json") as json_f:
+    states_data = json.load(json_f)
+for i in states_data["states"]:
+    del i["area_codes"]
+with open("00b_resources/states_updated.json", "w") as new_f:
+    json.dump(states_data, new_f, indent=1)
+    for i in states_data["states"]:
+        print(i.keys())
