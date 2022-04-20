@@ -1,10 +1,28 @@
 class SignalInformation:
 
-    def __init__(self, signal_power, path):
+    def __init__(self, signal_power):
         self.signal_power = signal_power
-        self.path = path
+        self.path = {}  # list[string]
         self.noise_power = 0.0
         self.latency = 0.0
+
+    # update values , increment
+    def update_sig_power(self, value):
+        self.signal_power += value
+
+    def update_noise_power(self, value):
+        self.noise_power += value
+
+    def update_latency(self, value):
+        self.latency += value
+
+    # update path    the current position in the path is at self.path[0]
+    # rimuove il nodo corrente quando giunge al successivo
+    def update_path(self):
+        self.path.pop(0)
+
+    def extend_path(self, node):
+        self.path.append(node)
 
     # get self
     def get_signal_info(self):
@@ -37,20 +55,3 @@ class SignalInformation:
 
     def set_noise_power(self, noise):
         self.noise_power = noise
-
-    # update values , increment
-    def update_sig_power(self, value):
-        self.signal_power += value
-
-    def update_noise_power(self, value):
-        self.noise_power += value
-
-    def update_latency(self, value):
-        self.latency += value
-
-    # update path
-    def update_path(self):
-        self.path.pop(0)
-
-    def extend_path(self, node):
-        self.path.append(node)

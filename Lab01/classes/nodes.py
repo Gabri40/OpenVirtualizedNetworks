@@ -2,11 +2,11 @@ from .signal_information import *
 
 
 class Node:
-    def __init__(self, att_dic):
-        self.label = att_dic["label"]
-        self.position = att_dic["position"]
+    def __init__(self, name, att_dic):
+        self.label = name
+        self.position = tuple(att_dic["position"])
         self.connected_nodes = att_dic["connected_nodes"]
-        self.successive = {}
+        self.successive = {}  # line dict
 
     # label
     def get_label(self):
@@ -23,10 +23,10 @@ class Node:
         self.position = pos
 
     # connected nodes
-    def get_connected_nodes(self):
+    def get_connected(self):
         return self.connected_nodes
 
-    def set_connecting_nodes(self, nodes):
+    def set_connecting(self, nodes):
         self.connected_nodes = nodes
 
     # successive
@@ -35,5 +35,3 @@ class Node:
 
     def set_successive(self, succ):
         self.successive = succ
-
-
