@@ -1,5 +1,5 @@
 from classes.signal_information import *
-from classes.nodes import *
+from classes.node import *
 from classes.line import *
 import json
 
