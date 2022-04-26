@@ -33,5 +33,5 @@ class Node:
     def get_successive(self):
         return self.successive
 
-    def set_successive(self, succ):
-        self.successive = succ
+    def add_successive(self, succ):
+        self.successive[succ.get_label()] = succ

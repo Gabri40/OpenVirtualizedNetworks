@@ -5,21 +5,21 @@ class SignalInformation:
         self.path = {}  # list[string]
         self.noise_power = 0.0
         self.latency = 0.0
+        self.path_index = 0  # index in path where signal currently is
 
     # update values , increment
-    def update_sig_power(self, value):
+    def add_power(self, value):
         self.signal_power += value
 
-    def update_noise_power(self, value):
+    def add_noise(self, value):
         self.noise_power += value
 
-    def update_latency(self, value):
+    def add_latency(self, value):
         self.latency += value
 
-    # update path    the current position in the path is at self.path[0]
-    # rimuove il nodo corrente quando giunge al successivo
+    # update path
     def update_path(self):
-        self.path.pop(0)
+        self.path_index += 1
 
     def extend_path(self, node):
         self.path.append(node)
