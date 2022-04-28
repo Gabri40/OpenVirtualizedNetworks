@@ -1,10 +1,13 @@
+import math
+
+
 class Line:
 
     def __init__(self, label, pos1, pos2):
         self.label = label
         self.start = pos1
         self.end = pos2
-        self.lenght = (pos1[0] - pos2[0], pos1[1] - pos2[1]) # ???????????????????????????????????
+        self.lenght = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
         self.successive = {}  # nodes dict
 
     # latency gen, assuminc c=3*10^8m/s
@@ -12,7 +15,7 @@ class Line:
         return self.lenght / 3e8
 
     def noise_generation(self, signal_power):
-        return 1e-9 * signal_power * self.length
+        return 1e-9 * signal_power * self.lenght
 
     # label
     def get_label(self): return self.label

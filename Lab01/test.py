@@ -38,11 +38,24 @@ import numpy as np
 
 # point 4
 filepath = "resources/nodes.json"
+info = SignalInformation(1e-3)
 net = Network(filepath)
 net.connect()
+print(net.create_df())
+
+# net.propagate(info, ["A", "B", "D", "E", "F"])
+# print("path:  " + str(info.get_path()))
+# print("lat:  " + str(info.get_latency()))
+# print("noise:  " + str(info.get_noise_power()))
+
 # net.print_nodes_info()
 # net.print_lines_info()
 # print(net.get_nodes_list())
 # print(net.get_lines_list())
-# for i in net.find_path("A", "F"): print(i)
-net.draw()
+
+# for i in net.find_path("A", "F"):
+#     print(i)
+# print("----------")
+# print(type(net.find_path("A", "F")))
+
+# net.draw()

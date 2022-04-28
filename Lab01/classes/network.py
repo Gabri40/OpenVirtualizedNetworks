@@ -5,6 +5,8 @@ import json
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import math
 
 
 class Network:
@@ -68,6 +70,7 @@ class Network:
     # given two node labels, this function re-
     # turns all the paths that connect the two nodes as list of node labels.
     # The admissible paths have to cross any node at most once;
+    # returns a LIST of all posiible paths
     def find_path(self, start, end, path=[]):
         path = path + [start]  # aggiunge elemento corrente al path
         paths_list = []
@@ -97,9 +100,34 @@ class Network:
     # draw the network using matplotlib
     # (nodes as dots and connection as lines).
     def draw(self):
-        for i in self.nodes.values():
-            plt.plot(i.get_position()[0], i.get_position()[1], marker="o", linestyle="none", color="green",)
-            plt.annotate(i.get_label(), (i.get_position()[0], i.get_position()[1]))
         for i in self.lines.values():
-            plt.plot([i.get_start()[0], i.get_end()[0]], [i.get_start()[1], i.get_end()[1]], color="green")
+            plt.plot([i.get_start()[0], i.get_end()[0]], [i.get_start()[1], i.get_end()[1]], color="blue", zorder=0)
+        for i in self.nodes.values():
+            plt.scatter(i.get_position()[0], i.get_position()[1], color="green", s=500)
+            plt.annotate(i.get_label(), (i.get_position()[0], i.get_position()[1]), color="white")
         plt.show()
+
+    def snr_dB(self, pw, ns):
+        return math.log10(float(pw) / float(ns)) * 10.0
+
+    # For all possible paths between all possible node couples, create a pandas
+    # dataframe that contains:
+    #   - the path string as ”A->B-> ...”
+    #   - the total accumulated latency
+    #   - the total accumulated noise
+    #   - the signal to noise ratio
+    # obtained with the propagation through the paths of a spectral information with a signal power of 1 mW
+    def create_df(self):
+        cols = ["path", "start", "end", "total_latency", "total_noise", "SNR"]
+        data = []  # list of lists
+        for start in self.nodes.keys():
+            for end in self.nodes.keys():
+                # per ogni combinazine di start e end
+                for path in self.find_path(start, end):
+                    if len(path) > 1:
+                        # print(path)
+                        sig = SignalInformation(1e-3)
+                        self.propagate(sig, path)
+                        data.append([path, start, end, sig.get_latency(), sig.get_noise_power(),
+                                     self.snr_dB(sig.get_sig_power(), sig.get_noise_power())])
+        return pd.DataFrame(data, columns=cols)
