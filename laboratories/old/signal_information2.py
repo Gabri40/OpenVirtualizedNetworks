@@ -2,7 +2,7 @@ class SignalInformation:
 
     def __init__(self, signal_power):
         self.signal_power = signal_power
-        self.path = {}  # list[string]
+        self.path = []  # list[string]
         self.noise_power = 0.0
         self.latency = 0.0
         self.path_index = 0  # index in path where signal currently is
@@ -18,6 +18,14 @@ class SignalInformation:
         self.latency += value
 
     # update path
+
+    # path, list of letters
+    def get_path(self):
+        return self.path
+
+    def set_path(self, path):
+        self.path = path
+
     def update_path(self):
         self.path_index += 1
 
@@ -35,13 +43,6 @@ class SignalInformation:
     def set_sig_power(self, power):
         self.signal_power = power
 
-    # path, list of letters
-    def get_path(self):
-        return self.path
-
-    def set_path(self, path):
-        self.path = path
-
     # latency
     def get_latency(self):
         return self.latency
@@ -55,3 +56,13 @@ class SignalInformation:
 
     def set_noise_power(self, noise):
         self.noise_power = noise
+
+
+class Lightpath(SignalInformation):
+    def __init__(self, signal_power):
+        super().__init__(signal_power)
+        self.channel = 0  # integer (0~10) indicates which frequency slot the signal occupies when is propagated
+
+    def get_channel(self): return self.channel
+
+    def set_channel(self, n): self.channel = n

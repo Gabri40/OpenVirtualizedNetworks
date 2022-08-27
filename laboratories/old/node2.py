@@ -1,4 +1,4 @@
-from .signal_information import *
+from .signal_information2 import *
 
 
 class Node:
@@ -7,6 +7,7 @@ class Node:
         self.position = tuple(att_dic["position"])
         self.connected_nodes = att_dic["connected_nodes"]
         self.successive = {}  # line dict
+
 
     # label
     def get_label(self):

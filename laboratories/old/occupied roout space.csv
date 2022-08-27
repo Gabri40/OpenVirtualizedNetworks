@@ -1,0 +1,351 @@
+path	start	end	ch1	ch2	ch3	ch4	ch5	ch6	ch7	ch8	ch9	ch10
+['A', 'B']	A	B	free	free	free	busy	free	free	free	free	busy	free
+['A', 'C', 'D', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'E', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'D', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'D', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'F', 'D', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'C', 'E', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'E', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'F', 'B']	A	B	free	free	free	free	free	free	free	free	busy	free
+['A', 'B', 'D', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'F', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'D', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'D', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'E', 'D', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'C']	A	C	busy	free	free	free	free	free	free	busy	free	free
+['A', 'D', 'B', 'F', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'C']	A	C	free	free	busy	free	free	free	free	free	free	free
+['A', 'D', 'E', 'C']	A	C	free	free	free	busy	free	free	free	free	free	free
+['A', 'D', 'F', 'E', 'C']	A	C	free	free	free	free	free	free	free	free	free	busy
+['A', 'B', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'E', 'C', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'E', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'F', 'B', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'F', 'D']	A	D	free	free	free	free	free	free	free	free	free	free
+['A', 'D']	A	D	free	free	free	free	free	free	busy	free	free	free
+['A', 'B', 'D', 'C', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'D', 'C', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'D', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'B', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E']	A	E	free	free	free	free	free	free	free	free	busy	free
+['A', 'D', 'B', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'C', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'F', 'E']	A	E	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'C', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'D', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'B', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'B', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'D', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'D', 'B', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'D', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'C', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'B', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'C', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'E', 'F']	A	F	free	free	free	free	free	free	free	free	free	free
+['A', 'D', 'F']	A	F	busy	free	free	free	free	free	free	free	free	free
+['B', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'A']	B	A	free	free	free	free	free	free	free	busy	free	free
+['B', 'D', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	busy
+['B', 'D', 'E', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'F', 'E', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'E', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'C', 'D', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'D', 'A']	B	A	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'D', 'C', 'A']	B	A	free	free	free	free	free	free	free	free	busy	free
+['B', 'A', 'C']	B	C	free	free	free	free	free	free	free	free	free	busy
+['B', 'A', 'D', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'E', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'F', 'E', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'A', 'C']	B	C	free	free	free	free	free	busy	free	free	free	free
+['B', 'D', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'E', 'C']	B	C	free	free	free	free	free	free	busy	free	free	free
+['B', 'D', 'F', 'E', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'A', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'E', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'D', 'A', 'C']	B	C	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'D', 'C']	B	C	busy	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'E', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'E', 'F', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D']	B	D	free	free	free	free	busy	free	free	free	free	free
+['B', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'C', 'A', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'C', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E', 'D']	B	D	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'D', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'D', 'F', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'F', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'A', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'E']	B	E	free	free	free	free	busy	free	free	free	free	free
+['B', 'D', 'F', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'A', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'C', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'D', 'E']	B	E	free	free	free	free	free	free	free	free	free	free
+['B', 'F', 'E']	B	E	free	free	free	free	free	free	busy	free	free	free
+['B', 'A', 'C', 'D', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'D', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'E', 'D', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'C', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'C', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'A', 'D', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'A', 'C', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'C', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'E', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'D', 'F']	B	F	free	free	free	free	free	free	free	free	free	free
+['B', 'F']	B	F	free	busy	free	free	free	free	free	busy	free	free
+['C', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	busy	free
+['C', 'D', 'E', 'F', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'F', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'F', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'B', 'D', 'A']	C	A	free	free	busy	free	free	free	free	free	free	free
+['C', 'E', 'F', 'D', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'D', 'B', 'A']	C	A	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'E', 'F', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'F', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'A', 'B']	C	B	free	free	free	free	busy	free	free	free	free	free
+['C', 'D', 'B']	C	B	free	busy	free	free	free	free	free	free	free	free
+['C', 'D', 'E', 'F', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'F', 'B']	C	B	free	free	free	busy	free	free	free	free	free	free
+['C', 'E', 'D', 'A', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'F', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'D', 'A', 'B']	C	B	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'D', 'B']	C	B	free	free	free	free	busy	busy	free	free	free	busy
+['C', 'A', 'B', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'F', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'F', 'E', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'B', 'A', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'B', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F', 'D']	C	D	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'D', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'D', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'F', 'D', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'B', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'A', 'B', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'B', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'F', 'E']	C	E	free	free	free	free	free	free	free	free	free	free
+['C', 'E']	C	E	busy	free	free	busy	free	free	free	free	free	free
+['C', 'A', 'B', 'D', 'E', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'D', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'E', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'A', 'D', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'A', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	busy
+['C', 'D', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'D', 'E', 'F']	C	F	busy	free	free	free	free	free	free	free	free	free
+['C', 'D', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'A', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'B', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'D', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['C', 'E', 'F']	C	F	free	free	free	free	free	free	free	free	free	free
+['D', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'F', 'E', 'C', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'E', 'F', 'B', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'C', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'F', 'B', 'A']	D	A	free	free	free	free	free	free	free	busy	free	free
+['D', 'F', 'B', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'E', 'C', 'A']	D	A	free	free	free	free	free	free	free	free	free	free
+['D', 'A', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'A', 'C', 'E', 'F', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'A', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'E', 'F', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'C', 'A', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'F', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'B']	D	B	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'E', 'C', 'A', 'B']	D	B	free	free	busy	free	free	free	free	free	free	free
+['D', 'A', 'B', 'F', 'E', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'A', 'C']	D	C	free	free	free	busy	free	free	free	free	free	free
+['D', 'B', 'A', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'F', 'E', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'C']	D	C	free	free	free	free	free	busy	free	free	free	free
+['D', 'E', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'F', 'B', 'A', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'B', 'A', 'C']	D	C	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'E', 'C']	D	C	free	free	free	free	free	busy	free	free	free	free
+['D', 'A', 'B', 'F', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'A', 'C', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'A', 'C', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'F', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'A', 'B', 'F', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'B', 'A', 'C', 'E']	D	E	free	free	free	free	free	free	free	free	free	free
+['D', 'F', 'E']	D	E	free	free	free	free	free	free	free	busy	free	free
+['D', 'A', 'B', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'A', 'C', 'E', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'A', 'C', 'E', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'B', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'A', 'B', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'C', 'E', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'C', 'A', 'B', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'E', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['D', 'F']	D	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'B', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'F', 'B', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'B', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'C', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'F', 'B', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'D', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'D', 'C', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'B', 'A']	E	A	free	free	free	busy	free	free	free	free	free	free
+['E', 'F', 'D', 'C', 'A']	E	A	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'D', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'D', 'F', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'F', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'C', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'F', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'C', 'A', 'B']	E	B	free	free	free	free	free	free	free	free	free	free
+['E', 'C']	E	C	free	free	free	free	busy	free	free	free	free	free
+['E', 'D', 'A', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'B', 'A', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'F', 'B', 'A', 'C']	E	C	free	free	free	free	free	free	busy	free	free	free
+['E', 'F', 'B', 'A', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'A', 'D', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'D', 'A', 'C']	E	C	free	busy	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'D', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'A', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'B', 'A', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D', 'C']	E	C	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'B', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'B', 'F', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'D']	E	D	free	free	free	free	free	busy	free	busy	free	free
+['E', 'F', 'B', 'A', 'C', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'A', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'B', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'F', 'D']	E	D	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'B', 'D', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'D', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'A', 'D', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'A', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'C', 'D', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'A', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'C', 'A', 'B', 'F']	E	F	free	free	free	free	free	free	free	free	free	free
+['E', 'D', 'F']	E	F	free	free	free	free	busy	free	free	free	free	free
+['E', 'F']	E	F	free	free	free	free	free	free	busy	free	free	free
+['F', 'B', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'C', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'E', 'C', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'B', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'C', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'E', 'C', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'D', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'D', 'B', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'B', 'A']	F	A	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'C', 'A']	F	A	free	free	free	busy	free	free	free	free	free	free
+['F', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'A', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'B']	F	B	free	free	busy	free	free	free	free	free	free	free
+['F', 'D', 'C', 'A', 'B']	F	B	free	free	free	free	free	free	free	busy	free	free
+['F', 'D', 'E', 'C', 'A', 'B']	F	B	free	busy	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'A', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'A', 'D', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'D', 'A', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'D', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'A', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'C', 'A', 'B']	F	B	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'D', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'D', 'E', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'E', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'B', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'E', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'B', 'A', 'C']	F	C	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D', 'C']	F	C	free	busy	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'C', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'C', 'E', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'D']	F	D	busy	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'A', 'B', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'A', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'C', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'E', 'D']	F	D	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'C', 'D', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'D', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'A', 'D', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'A', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'B', 'D', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'A', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'B', 'A', 'C', 'E']	F	E	free	free	free	free	free	free	free	free	free	free
+['F', 'D', 'C', 'E']	F	E	free	free	free	free	free	free	busy	free	free	free
+['F', 'D', 'E']	F	E	free	free	free	free	free	free	free	free	busy	free
+['F', 'E']	F	E	free	free	free	free	busy	free	free	free	free	free

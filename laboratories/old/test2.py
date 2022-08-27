@@ -1,11 +1,17 @@
-from classes.signal_information import *
-from classes.node import *
-from classes.line import *
-from classes.network import *
+from classes.signal_information2 import *
+from classes.node2 import *
+from classes.line2 import *
+from classes.network2 import *
 import json
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import random
+
+
+def div(): print("----------")
+
 
 # point 1 test
 # info = SignalInformation(100.0, )
@@ -41,7 +47,11 @@ filepath = "resources/nodes.json"
 info = SignalInformation(1e-3)
 net = Network(filepath)
 net.connect()
-print(net.create_df())
+print(net.get_weighted_paths())
+# div()
+# print(net.find_best_snr("F", "E"))
+# div()
+# print(type(net.find_best_latency("F", "E")))
 
 # net.propagate(info, ["A", "B", "D", "E", "F"])
 # print("path:  " + str(info.get_path()))
@@ -55,7 +65,28 @@ print(net.create_df())
 
 # for i in net.find_path("A", "F"):
 #     print(i)
-# print("----------")
+# div()
 # print(type(net.find_path("A", "F")))
 
 # net.draw()
+
+# CONNECTION CLASS  STREAM METHOD
+
+# div()
+# conn_l = []
+# nodes = "ABCDEF"
+# for i in range(10):
+#     inp = random.choice(nodes)
+#     while 1:
+#         out = random.choice(nodes)
+#         if out != inp: break
+#     c = Connection(inp, out, 1e-3)
+#     conn_l.append(c)
+#
+# net.stream(conn_l, "snr")
+#
+# for c in conn_l:
+#     print(c.get_input_node() + " "
+#           + c.get_output_node() + " "
+#           + str(c.get_snr()) + " "
+#           + str(c.get_latency()) + "\n")
