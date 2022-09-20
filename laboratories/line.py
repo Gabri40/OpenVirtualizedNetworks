@@ -11,7 +11,7 @@ class Line(object):
         self._label = line_dict['label']
         self._length = line_dict['length']
         self._successive = {}  # dict [Node]
-        self._state = 'free'
+        self._state = ['free'] * 10
 
     # label
     def label(self):
@@ -42,15 +42,18 @@ class Line(object):
         return 1e-9 * signal_power * self.length()
 
     # PROPAGATE
-    def propagate(self, signal_information, busy=False):
+    def propagate(self, lightpath, busy=False):
         # update noise and latency of siginfo
         latency = self.latency_generation()
-        signal_information.add_latency(latency)
-        signal_power = signal_information.signal_power()
+        lightpath.add_latency(latency)
+        signal_power = lightpath.signal_power()
         noise = self.noise_generation(signal_power)
-        signal_information.add_noise(noise)
-        if busy: self._state = 'occupied'
+        lightpath.add_noise(noise)
 
-        node = self.successive()[signal_information.path()[0]]
-        signal_information = node.propagate(signal_information, busy)
-        return signal_information
+        if busy:
+            ch = lightpath.get_channel()
+            self._state[ch] = 'occupied'
+
+        node = self.successive()[lightpath.path()[0]]
+        lightpath = node.propagate(lightpath, busy)
+        return lightpath

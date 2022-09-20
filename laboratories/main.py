@@ -18,6 +18,7 @@ wp_power = 0.001
 network.create_weighted_paths(wp_power)
 # network.draw()
 # print(network.weighted_paths())
+# print(network.route_space())
 
 # --------------------- CREATE RANDOM CONN LIST AND PLOT SNR, LAT DISTRIBUTIONS
 nodes = list(network.nodes().keys())
@@ -35,11 +36,15 @@ for connection in streamed_connections:
     latencies.append(connection.latency())
     snrs.append(connection.snr())
 
-plt.hist(latencies)
-plt.title("Latency Distribution")
-plt.show()
-plt.hist(snrs)
-plt.title("SNR Distribution")
-plt.show()
+# plt.hist(latencies)
+# plt.title("Latency Distribution")
+# plt.show()
+# plt.hist(snrs)
+# plt.title("SNR Distribution")
+# plt.show()
 
-print(network.weighted_paths())
+pd.set_option('display.max_columns', None)  # or 1000
+pd.set_option('display.max_rows', None)  # or 1000
+pd.set_option('display.max_colwidth', 10)  # or 199
+# print(network.weighted_paths())
+print(network.route_space())

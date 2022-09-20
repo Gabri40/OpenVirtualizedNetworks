@@ -1,12 +1,23 @@
 import json
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy import special
 
 from node import *
 from signal_information import *
 from line import *
 from connection import *
+
+BER_t = 1e-3
+Rs = 32e9  # symbol-rate of the light-path that can be fixed to 32 GHz
+Bn = 12.5e9  # noise bandwidth
+
+
+def path_to_line_set(path):
+    path = path.replace('->', '')
+    return set([path[i] + path[i + 1] for i in range(len(path) - 1)])
 
 
 class Network:
@@ -16,6 +27,7 @@ class Network:
         self.build_nodes_lines_dict(json_path)
         self._connected = False
         self._weighted_paths = None
+        self._route_space = None
 
     # udes in init
     # builds nodes and line as dict entries from json file : json example:
@@ -103,12 +115,12 @@ class Network:
         print("\nConnected!\n")
 
     # PROPAGATE
-    def propagate(self, signal_information, busy):
-        path = signal_information.path()
+    def propagate(self, lightpath, busy=False):
+        path = lightpath.path()
         nodename = path[0]
         start_node = self.nodes()[nodename]
-        propagated_signal_information = start_node.propagate(signal_information, busy)
-        return propagated_signal_information
+        propagated_lightpath = start_node.propagate(lightpath, busy)
+        return propagated_lightpath
 
     # GENERATE DATAFRAME
     def create_weighted_paths(self, power):
@@ -121,7 +133,7 @@ class Network:
                 if label1 != label2:
                     pairs.append(label1 + label2)
 
-        columns = ['path', 'latency', 'noise', 'snr']
+        # columns = ['path', 'latency', 'noise', 'snr']
         df = pd.DataFrame()
         paths = []
         latencies = []
@@ -147,10 +159,14 @@ class Network:
         df['latency'] = latencies
         df['noise'] = noises
         df['snr'] = snrs
-        pd.set_option('display.max_columns', None)  # or 1000
-        pd.set_option('display.max_rows', 100)  # or 1000
-        pd.set_option('display.max_colwidth', 20)  # or 199
+
         self._weighted_paths = df
+
+        route_space = pd.DataFrame()
+        route_space['path'] = paths
+        for i in range(10):
+            route_space[str(i)] = ['free'] * len(paths)
+        self._route_space = route_space
 
     def weighted_paths(self):
         return self._weighted_paths
@@ -165,7 +181,7 @@ class Network:
             inout_df = self.weighted_paths().loc[self.weighted_paths().path.isin(inout_paths)]
 
             best_snr = np.max(inout_df.snr.values)
-            best_path = inout_df.loc[inout_df.snr == best_snr].path.values[0].replace('->', '')
+            best_path = inout_df.loc[inout_df.snr == best_snr].path.values[0]
             return best_path
         else:
             return None
@@ -177,7 +193,7 @@ class Network:
             inout_df = self.weighted_paths().loc[self.weighted_paths().path.isin(inout_paths)]
 
             best_latency = np.min(inout_df.latency.values)
-            best_path = inout_df.loc[inout_df.latency == best_latency].path.values[0].replace('->', '')
+            best_path = inout_df.loc[inout_df.latency == best_latency].path.values[0]
             return best_path
 
         else:
@@ -199,21 +215,39 @@ class Network:
             output_node = connection.output_node()
             signal_power = connection.signal_power()
             self.create_weighted_paths(signal_power)
+
             if best == "latency":
                 path = self.find_best_latency(input_node, output_node)
-            else:
+            elif best == "snr":
                 path = self.find_best_snr(input_node, output_node)
+            else:
+                path = None
+                print("ERROR")
 
-            if path:  # check availability path
-                # crea e propaga un siginfo con power= conn.power per calcolare snr e latency della connessione
-                in_signal_information = SignalInformation(signal_power, path)
-                out_signal_information = self.propagate(in_signal_information, True)
-                connection.set_latency(out_signal_information.latency())
-                noise = out_signal_information.noise_power()
+            # print(path)
+            if path:
+                path_occupancy = self.route_space().loc[self.route_space().path == path].T.values[1:]
+                # print(path_occupancy)
+                # print()
+                channel = [i for i in range(len(path_occupancy)) if path_occupancy[i] == 'free'][0]
+                # print(channel)
+                # print()
+
+                path = path.replace('->', '')
+
+                in_lightpath = Lightpath(signal_power, path, channel)
+                out_lightpath = self.propagate(in_lightpath, True)
+                connection.set_latency(out_lightpath.latency())
+
+                noise = out_lightpath.noise_power()
                 connection.set_snr(10 * np.log10(signal_power / noise))
+
+                self.update_route_space(path, channel)
+
             else:
                 connection.set_latency(None)
                 connection.set_snr(0)
+
             streamed_connections.append(connection)
 
         return streamed_connections
@@ -226,18 +260,52 @@ class Network:
             if (path[0] == input_node) and (path[-1] == output_node):
                 all_paths.append(path)
 
-        # gen tutte linee non dispo
-        unavailable_lines = [line for line in self.lines() if self.lines()[line].state == 'occupied']
-
-        # se un alinea non dispo si trova nel path corrente questo non e disponibile
+        # se una linea non dispo si trova nel path corrente questo non e disponibile
         available_paths = []
         for path in all_paths:
-            available = True
-            for line in unavailable_lines:
-                if line[0] + '->' + line[1] in path:
-                    available = False
-                    break
-            if available:
+            path_occupancy = self.route_space().loc[self.route_space().path == path].T.values[1:]
+            if 'free' in path_occupancy:
                 available_paths.append(path)
-
         return available_paths
+
+    # ROUTE SPACE
+    def route_space(self):
+        return self._route_space
+
+    def update_route_space(self, path, channel):
+        all_paths = [path_to_line_set(p) for p in self.route_space().path.values]
+        states = self.route_space()[str(channel)]
+        lines = path_to_line_set(path)
+        for i in range(len(all_paths)):
+            line_set = all_paths[i]
+            if lines.intersection(line_set):
+                states[i] = 'occupied'
+        self.route_space()[str(channel)] = states
+
+    def calculate_bit_rate(self, lightpath, strategy):
+        path = lightpath.path()
+        GSNR_db = pd.array(self.weighted_paths().loc[self.weighted_paths()['path'] == path]['snr'])[0]
+        GSNR = 10 ** (GSNR_db / 10)
+
+        if strategy == 'fixed_rate':
+            if GSNR > 2 * special.erfcinv(2 * BER_t) ** 2 * (Rs / Bn):
+                Rb = 100
+            else:
+                Rb = 0
+
+        if strategy == 'flex_rate':
+            if GSNR < 2 * special.erfcinv(2 * BER_t) ** 2 * (Rs / Bn):
+                Rb = 0
+            elif (GSNR > 2 * special.erfcinv(2 * BER_t) ** 2 * (Rs / Bn)) & (GSNR < (14 / 3) * special.erfcinv(
+                    (3 / 2) * BER_t) ** 2 * (Rs / Bn)):
+                Rb = 100
+            elif (GSNR > (14 / 3) * special.erfcinv((3 / 2) * BER_t) ** 2 * (Rs / Bn)) & (GSNR < 10 * special.erfcinv(
+                    (8 / 3) * BER_t) ** 2 * (Rs / Bn)):
+                Rb = 200
+            elif GSNR > 10 * special.erfcinv((8 / 3) * BER_t) ** 2 * (Rs / Bn):
+                Rb = 400
+
+        if strategy == 'shannon':
+            Rb = 2 * Rs * np.log2(1 + Bn / Rs * GSNR) / 1e9
+
+        return Rb

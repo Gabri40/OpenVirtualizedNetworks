@@ -39,4 +39,14 @@ class SignalInformation(object):
 
     # path movement
     def next(self):
-        self._path = self._path[1:]     # "pop" first elem in path list , first elemetn become next step
+        self._path = self._path[1:]  # "pop" first elem in path list , first elemetn become next step
+
+
+class Lightpath(SignalInformation):
+    def __init__(self, signal_power, path, channel):
+        super().__init__(signal_power, path)
+        self.channel = channel  # integer (0~10) indicates which frequency slot the signal occupies when is propagated
+
+    def get_channel(self): return self.channel
+
+    def set_channel(self, n): self.channel = n
