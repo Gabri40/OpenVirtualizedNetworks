@@ -36,12 +36,12 @@ for connection in streamed_connections:
     latencies.append(connection.latency())
     snrs.append(connection.snr())
 
-# plt.hist(latencies)
-# plt.title("Latency Distribution")
-# plt.show()
-# plt.hist(snrs)
-# plt.title("SNR Distribution")
-# plt.show()
+plt.hist(latencies)
+plt.title("Latency Distribution")
+plt.show()
+plt.hist(snrs)
+plt.title("SNR Distribution")
+plt.show()
 
 pd.set_option('display.max_columns', None)  # or 1000
 pd.set_option('display.max_rows', None)  # or 1000
