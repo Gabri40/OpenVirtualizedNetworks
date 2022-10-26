@@ -1,9 +1,4 @@
-import json
-import numpy as np
-import matplotlib.pyplot as plt
-
-from signal_information import *
-
+import signal_Information
 
 class Node(object):
 
@@ -12,6 +7,7 @@ class Node(object):
         self._position = node['position']  # tuple
         self._connected_nodes = node['connected_nodes']  # list of strings
         self._successive = {}  # dict of Line
+        self._state=0 # 0 free, 1 busy
 
     # label
     def label(self):
@@ -29,12 +25,7 @@ class Node(object):
     def successive(self):
         return self._successive
 
-    # PROPAGATE
-    def propagate(self, lightpath, busy=False):
-        path = lightpath.path()
-        if len(path) > 1:
-            line_label = path[0] + path[1]  # the 1st and the 2nd element of path
-            line = self.successive()[line_label]
-            lightpath.next()
-            signal_information = line.propagate(lightpath, busy)
-        return lightpath
+    # state
+    def state(self): return self._state
+
+    def occupy(self): self._state=1
