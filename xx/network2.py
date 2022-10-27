@@ -167,7 +167,7 @@ class Network:
         for i in range(10):
             route_space[str(i)] = ['free'] * len(paths)
         self._route_space = route_space
-
+    @property
     def weighted_paths(self):
         return self._weighted_paths
 

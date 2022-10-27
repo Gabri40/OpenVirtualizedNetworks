@@ -1,27 +1,38 @@
-import signal_Information
+import signal_information
 
 class Node(object):
+    def __init__(self, node_dict):
+        self._label = node_dict['label']
+        self._position = node_dict['position']
+        self._connected_nodes = node_dict['connected_nodes']
+        self._successive = {}
 
-    def __init__(self, node):
-        self._label = node['label']  # string
-        self._position = node['position']  # tuple
-        self._connected_nodes = node['connected_nodes']  # list of strings
-        self._successive = {}  # dict of Line
-        self._state=0 # 0 free, 1 busy
-
-    # label
+    @property
     def label(self):
         return self._label
-
-    # pos
+    
+    @property
     def position(self):
         return self._position
-
-    # conn nodes
+    
+    @property
     def connected_nodes(self):
         return self._connected_nodes
-
-    # succ
+    
+    @property
     def successive(self):
         return self._successive
-
+    @successive.setter
+    def successive(self, successive):
+        self._successive = successive
+    
+    def propagate(self, signal_information):
+        path = signal_information.path
+        if len(path) > 1:
+            line_label = path[:2]
+            linestr=""
+            # print(linestr.join(line_label))
+            line = self.successive[linestr.join(line_label)] #  line_label = path[:2] da una list
+            signal_information.next()
+            signal_information = line.propagate(signal_information)
+        return signal_information
