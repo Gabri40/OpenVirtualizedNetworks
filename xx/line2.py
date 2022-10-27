@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from node import *
-from signal_information import *
+from xx.signal_information2 import *
 
 
 class Line(object):

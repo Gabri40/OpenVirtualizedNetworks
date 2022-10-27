@@ -25,7 +25,3 @@ class Node(object):
     def successive(self):
         return self._successive
 
-    # state
-    def state(self): return self._state
-
-    def occupy(self): self._state=1

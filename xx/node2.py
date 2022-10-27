@@ -2,7 +2,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-from signal_information import *
+from xx.signal_information2 import *
 
 
 class Node(object):

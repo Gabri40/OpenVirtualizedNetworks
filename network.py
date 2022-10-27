@@ -15,6 +15,7 @@ class Network:
         self._lines = {}
         self.build_NL_dicts(json_path)
         self._weighted_paths = None
+        self._route_space = None
 
     
 
@@ -79,10 +80,10 @@ class Network:
         return paths_list
 
 
-    # PROPAGATE
+    # PROPAGATE -> PROBE
     # has to propagate the signal information through the path specified in it and returns it
     # with the udated noise and latency
-    def propagate(self, signal_info):
+    def probe(self, signal_info):
         path = signal_info.path()
         for node_ind in range(len(path)-1):
             line_label=str(path[node_ind]+path[node_ind+1])
@@ -118,7 +119,7 @@ class Network:
                         path_string += node + '->'
                     paths.append(path_string[: -2])  # salva formattato cancelladno ultimo "->"
                     signal_information = SignalInformation(power, path)
-                    signal_information = self.propagate(signal_information)
+                    signal_information = self.probe(signal_information)
                     latencies.append(signal_information.latency())
                     noises.append(signal_information.noise_power())
                     snrs.append(10.0 * np.log10(signal_information.signal_power() / signal_information.noise_power()))
@@ -201,7 +202,7 @@ class Network:
                 
             if path:
                 sig=SignalInformation(signal_power,path)
-                self.propagate(sig)
+                self.probe(sig)
                 connection.set_latency(sig.latency())
                 connection.set_snr(10.0 * np.log10(sig.signal_power() / sig.noise_power()))
             else :
@@ -209,3 +210,29 @@ class Network:
                 connection.set_latency(None)
             streamed_connections.append(connection)
         return streamed_connections    
+
+    
+    # ROUTE SPACE
+    def create_route_space(self):
+        df = pd.DataFrame()
+        paths = []
+        latencies = []
+        noises = []
+        snrs = []
+        node_labels = self.nodes()
+        pairs = []
+        power=1e-3
+
+        # genera tutte le coppie di (start,end)
+        for label1 in node_labels:
+            for label2 in node_labels:
+                if label1 != label2:
+                    pairs.append(label1 + label2)
+
+        for pair in pairs: # per ogni coppia
+            for path in self.find_path(pair[0], pair[1]): # calcola tutti i path
+                path_string = ''
+                if len(path) > 1:
+                    for node in path:
+                        path_string += node + '->'
+                    paths.append(path_string[: -2])  # salva formattato cancelladno ultimo "->"

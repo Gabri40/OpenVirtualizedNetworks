@@ -6,7 +6,7 @@ import pandas as pd
 from scipy import special
 
 from node import *
-from signal_information import *
+from xx.signal_information2 import *
 from line import *
 from connection import *
 

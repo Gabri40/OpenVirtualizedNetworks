@@ -5,7 +5,7 @@ import pandas as pd
 
 from random import shuffle
 
-from signal_information import *
+from xx.signal_information2 import *
 from node import *
 from line import *
 from network import *
