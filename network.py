@@ -1,4 +1,5 @@
 import json
+from matplotlib.style import available
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -51,6 +52,10 @@ class Network(object):
     def weighted_paths(self):
         return self._weighted_paths
 
+    @property
+    def route_space(self):
+        return self._route_space
+
 
     # ------------------------------------------------------------ CONNECT
     def connect(self):
@@ -85,16 +90,18 @@ class Network(object):
 
 
     # ------------------------------------------------------------ PROPAGATE
-    def propagate(self, signal_info):
+    def probe(self, signal_info):
         path = signal_info.path
         start_node = self.nodes[path[0]]
         propagated_lightpath=start_node.propagate(signal_info)
         return propagated_lightpath
-    # def propagate(self, lightpath,channel):
-    #     path = lightpath.path
-    #     start_node = self.nodes[path[0]]
-    #     propagated_lightpath=start_node.propagate(lightpath)
-    #     return propagated_lightpath
+
+    def propagate(self, lightpath,busy=False):
+        path = lightpath.path
+        start_node = self.nodes[path[0]]
+        propagated_lightpath=start_node.propagate(lightpath)
+        return propagated_lightpath
+
 
 
     # ------------------------------------------------------------ DRAW
@@ -142,7 +149,7 @@ class Network(object):
 
                 # Propagation
                 signal_information = SignalInformation(power, path)
-                signal_information = self.propagate(signal_information)
+                signal_information = self.probe(signal_information)
                 latencies.append(signal_information.latency)
                 noises.append(signal_information.noise_power)
                 snrs.append(10*np.log10(signal_information.signal_power/signal_information.noise_power))
@@ -156,18 +163,27 @@ class Network(object):
         self._weighted_paths = df
 
 
+        route_space=pd.DataFrame()
+        route_space['path']=paths
+        for i in range (10):
+            route_space[str(i)]=['free']*len(paths)
+        self._route_space=route_space
+
+
     # ------------------------------------------------------------ FIND BEST PATH
     def find_best_snr(self,start,end):
+        channel=0
         paths=self.weighted_paths.path.values
         inout_paths=[path for path in paths if path[0]==start and path[-1]==end]
-
+        
         inout_df = self.weighted_paths.loc[ self.weighted_paths.path.isin(inout_paths) ]
         best_snr= np.max(inout_df.snr.values)
         best_path = inout_df.loc[ inout_df.snr== best_snr ].path.values[0].replace('->','')
 
-        return best_path
+        return best_path,channel
 
     def find_best_latency(self,start,end):
+        channel=0
         paths=self.weighted_paths.path.values
         inout_paths=[path for path in paths if path[0]==start and path[-1]==end]
 
@@ -175,9 +191,10 @@ class Network(object):
         best_lat = np.min(inout_df.latency.values)
         best_path = inout_df.loc[ inout_df.latency == best_lat ].path.values[0].replace('->','')
 
-        return best_path
+        return best_path,channel
 
 
+        
     # ------------------------------------------------------------ STREAM
     # for each element
     # of a given list of instances of the class Connection, sets its latency
@@ -196,9 +213,9 @@ class Network(object):
             sig_power = connection.signal_power
 
             if best == 'latency':
-                path = self.find_best_latency(in_node, out_node)
+                path,channel = self.find_best_latency(in_node, out_node)
             elif best == 'snr':
-                path = self.find_best_snr(in_node, out_node)
+                path,channel = self.find_best_snr(in_node, out_node)
             else:
                 print('ERROR INPUT VALUE:', best)
                 continue

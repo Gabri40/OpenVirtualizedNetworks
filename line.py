@@ -37,7 +37,7 @@ class Line(object):
         noise=1e-9*signal_power*self.length
         return noise
     
-    def propagate(self, signal_information,busy=False):
+    def probe(self, signal_information,busy=False):
         # Update latency
         latency = self.latency_generation()
         signal_information.add_latency(latency)
@@ -51,3 +51,20 @@ class Line(object):
         node = self.successive[signal_information.path[0]]
         signal_information = node.propagate(signal_information,busy)
         return signal_information
+
+    def propagate(self, lightpath,busy=False):
+        # Update latency
+        latency = self.latency_generation()
+        lightpath.add_latency(latency)
+
+        # Update noise
+        signal_power = lightpath.signal_power
+        noise = self.noise_generation(signal_power)
+        lightpath.add_noise(noise)
+
+        if busy: self._states[lightpath.channel]="occupied"
+
+        # print("prop: "+str(self.label))
+        node = self.successive[lightpath.path[0]]
+        lightpath = node.propagate(lightpath,busy)
+        return lightpath

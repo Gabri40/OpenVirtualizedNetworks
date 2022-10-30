@@ -28,7 +28,7 @@ class Node(object):
     def successive(self, successive):
         self._successive = successive
     
-    def propagate(self, signal_information,busy=False):
+    def probe(self, signal_information,busy=False):
         path = signal_information.path
         if len(path) > 1:
             line_label = path[:2]
@@ -37,3 +37,13 @@ class Node(object):
             signal_information.next()
             signal_information = line.propagate(signal_information,busy)
         return signal_information
+
+    def propagate(self, lightpath,busy=False):
+        path = lightpath.path
+        if len(path) > 1:
+            line_label = path[:2]
+            linestr=""
+            line = self.successive[linestr.join(line_label)] #  line_label = path[:2] da una list
+            lightpath.next()
+            lightpath = line.propagate(lightpath,busy)
+        return lightpath

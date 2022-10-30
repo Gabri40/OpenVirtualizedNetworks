@@ -15,11 +15,14 @@ network.connect()
 
 # ------------------------------------------------------------ WEIGHTED PATH
 network.set_weighted_paths(1e-3)
-# pd.set_option('display.max_columns', None)  # val or None
-# pd.set_option('display.max_rows', None)  # val or None
-# pd.set_option('display.max_colwidth', 15)  # or 199
+pd.set_option('display.max_columns', None)  # val or None
+pd.set_option('display.max_rows', 50)  # val or None
+pd.set_option('display.max_colwidth', 15)  # or 199
 print("\nWEIGHTED GRAPH")
 print(network.weighted_paths)
+
+print("\nEMPTY ROUTE SPACE")
+print(network.route_space)
 
 
 # ------------------------------------------------------------ STREAM
