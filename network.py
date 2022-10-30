@@ -2,18 +2,22 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from scipy.constants import c
 
 from signal_information import *
+from lightpath import *
 from node import *
 from line import *
 from connection import *
+
 
 class Network(object):
     def __init__(self, json_path):
         node_json = json.load(open(json_path,'r'))
         self._nodes = {}
         self._lines = {}
+        self._connected= False
+
+        # crea dizionari di nodes e lines partendo da json
         for node_label in node_json:
             # Create the node instance
             node_dict = node_json[node_label]
@@ -33,6 +37,7 @@ class Network(object):
                 self._lines[line_label] = line
 
         self._weighted_paths= None
+        self._route_space=None
     
     @property
     def nodes(self):
@@ -45,8 +50,56 @@ class Network(object):
     @property
     def weighted_paths(self):
         return self._weighted_paths
+
+
+    # ------------------------------------------------------------ CONNECT
+    def connect(self):
+        nodes_dict = self.nodes
+        lines_dict = self.lines
+        for node_label in nodes_dict:
+            node = nodes_dict[node_label]
+            for connected_node in node.connected_nodes:
+                line_label = node_label + connected_node
+                line = lines_dict[line_label]
+                line.successive[connected_node] = nodes_dict[connected_node]
+                node.successive[line_label] = lines_dict[line_label]
+        print("\n--CONNECTED--\n")
+        self._connected=True
+
     
+    # ------------------------------------------------------------ FIND PATHS
+    def find_paths(self, start, end,path=[]):
+        path = path +[start]  # aggiunge elemento corrente al path
+        paths_list =[]
+        if start == end:
+            return[path]  # quando start==fine path completo
+
+        for node in self._nodes[start].connected_nodes:  # per ogni nodo adiacente al nodo corrente
+            if node not in path:  # se non e gia stato considerato in questo path
+                subpaths = self.find_paths(node, end, path) # chiama ricorsivamente find_path con start il nodo corrente
+
+                for subpath in subpaths:
+                    paths_list.append(subpath) # aggiorna paths_list
+
+        return paths_list
+
+
+    # ------------------------------------------------------------ PROPAGATE
+    def propagate(self, signal_info):
+        path = signal_info.path
+        start_node = self.nodes[path[0]]
+        propagated_lightpath=start_node.propagate(signal_info)
+        return propagated_lightpath
+    # def propagate(self, lightpath,channel):
+    #     path = lightpath.path
+    #     start_node = self.nodes[path[0]]
+    #     propagated_lightpath=start_node.propagate(lightpath)
+    #     return propagated_lightpath
+
+
+    # ------------------------------------------------------------ DRAW
     def draw(self):
+        if not self._connected: self.connect()
         nodes = self.nodes
         for node_label in nodes.keys():
             n0 = nodes[node_label]
@@ -62,40 +115,10 @@ class Network(object):
         plt.title('TOPOLOGY')
         plt.show()
     
-    def find_paths(self, start, end,path=[]):
-        path = path +[start]  # aggiunge elemento corrente al path
-        paths_list =[]
-        if start == end:
-            return[path]  # quando start==fine path completo
 
-        for node in self._nodes[start].connected_nodes:  # per ogni nodo adiacente al nodo corrente
-            if node not in path:  # se non e gia stato considerato in questo path
-                subpaths = self.find_paths(node, end, path) # chiama ricorsivamente find_path con start il nodo corrente
-
-                for subpath in subpaths:
-                    paths_list.append(subpath) # aggiorna paths_list
-
-        return paths_list
-    
-    def connect(self):
-        nodes_dict = self.nodes
-        lines_dict = self.lines
-        for node_label in nodes_dict:
-            node = nodes_dict[node_label]
-            for connected_node in node.connected_nodes:
-                line_label = node_label + connected_node
-                line = lines_dict[line_label]
-                line.successive[connected_node] = nodes_dict[connected_node]
-                node.successive[line_label] = lines_dict[line_label]
-        print("\n--CONNECTED--\n")
-    
-    def propagate(self, signal_information,occupation=False):
-        path = signal_information.path
-        start_node = self.nodes[path[0]]
-        propagated_signal_information=start_node.propagate(signal_information,occupation)
-        return propagated_signal_information
-
+    # ------------------------------------------------------------ WEIGHTED PATH
     def set_weighted_paths(self,power):
+        if not self._connected: self.connect()
         node_labels = self._nodes.keys()
         pairs =[]
         for label1 in node_labels:
@@ -129,73 +152,74 @@ class Network(object):
         df["noise"] = noises
         df["snr"] = snrs
 
-        self._weighted_paths = df
         # self._weighted_paths = df.set_index("path")
+        self._weighted_paths = df
 
-    def available_paths(self,input_node,output_node):
-        all_paths =[path for path in self.weighted_paths.path.values
-            if((path[0]== input_node)and(path[-1]== output_node)) ]
-        unavailable_lines =[line for line in self.lines
-            if self.lines[line].state =='occupied' ]
 
-        available_paths =[]
-        for path in all_paths :
-            available = True
-            for line in unavailable_lines :
-                if line[0] +'->'+ line[1] in path :
-                    available = False
-                    break
-            if available :
-                available_paths.append(path)
-        return available_paths
+    # ------------------------------------------------------------ FIND BEST PATH
+    def find_best_snr(self,start,end):
+        paths=self.weighted_paths.path.values
+        inout_paths=[path for path in paths if path[0]==start and path[-1]==end]
 
-    def find_best_snr(self,input_node,output_node):
-        available_paths = self.available_paths(input_node, output_node)
-        if available_paths:
-            inout_paths =[path for path in available_paths
-                if((path[0]== input_node)and(path[-1]== output_node))]
-            inout_df = self.weighted_paths.loc[
-                self.weighted_paths.path.isin(inout_paths)]
-            best_snr = np.max(inout_df.snr.values)
-            best_path = inout_df.loc[
-                inout_df.snr == best_snr].path.values[0].replace('->','')
+        inout_df = self.weighted_paths.loc[ self.weighted_paths.path.isin(inout_paths) ]
+        best_snr= np.max(inout_df.snr.values)
+        best_path = inout_df.loc[ inout_df.snr== best_snr ].path.values[0].replace('->','')
+
         return best_path
-    
-    def find_best_latency(self,input_node,output_node):
-        available_paths = self.available_paths(input_node, output_node)
-        if available_paths:
-            inout_paths =[path for path in all_paths
-                if((path[0]== input_node)and(path[-1]== output_node))]
-            inout_df = self.weighted_paths.loc[
-                self.weighted_paths.path.isin(inout_paths)]
-            best_latency = np.min(inout_df.snr.values)
-            best_path = inout_df.loc[
-                inout_df.snr == best_latency].path.values[0].replace('->','')
+
+    def find_best_latency(self,start,end):
+        paths=self.weighted_paths.path.values
+        inout_paths=[path for path in paths if path[0]==start and path[-1]==end]
+
+        inout_df = self.weighted_paths.loc[ self.weighted_paths.path.isin(inout_paths) ]
+        best_lat = np.min(inout_df.latency.values)
+        best_path = inout_df.loc[ inout_df.latency == best_lat ].path.values[0].replace('->','')
+
         return best_path
 
 
-    # ------------------------ STREAM
-    def stream(self, connections, best ='latency'):
-        streamed_connections =[]
-        for connection in connections :
-            input_node = connection.input_node
-            output_node = connection.output_node
-            signal_power = connection.signal_power
-            self.set_weighted_paths(signal_power)
-            
-            if best =='latency':
-                path = self.find_best_latency(input_node, output_node)
-            elif best =='snr':
-                path = self.find_best_snr(input_node, output_node)
+    # ------------------------------------------------------------ STREAM
+    # for each element
+    # of a given list of instances of the class Connection, sets its latency
+    # and snr attribute. These values have to be calculated propagating a
+    # SignalInformation instance that has the path that connects the input
+    # and the output nodes of the connection and that is the best snr or latency
+    # path between the considered nodes. The choice of latency or snr has to
+    # be made with a label passed as input to the stream function. The label
+    # default value has to be set as latency.
+    def stream(self, connections, best='latency'):
+        if not self._connected: self.connect()
+        streamed_connections = []
+        for connection in connections:
+            in_node = connection.input_node
+            out_node = connection.output_node
+            sig_power = connection.signal_power
 
-            if path: # check di availability fatto gia in find_best_srn/lat
-                in_signal_information = SignalInformation(signal_power, path)
-                out_signal_information = self.propagate(in_signal_information)
-                connection.latency = out_signal_information.latency
-                noise = out_signal_information.noise_power
-                connection.snr = 10 * np.log10(signal_power / noise)
+            if best == 'latency':
+                path = self.find_best_latency(in_node, out_node)
+            elif best == 'snr':
+                path = self.find_best_snr(in_node, out_node)
             else:
-                connection.latency = None
-                connection.snr=0
+                print('ERROR INPUT VALUE:', best)
+                continue
+
+            in_signal_information = SignalInformation(sig_power,path)
+            out_signal_information = self.propagate(in_signal_information)
+
+            connection.latency = out_signal_information.latency
+            noise = out_signal_information.noise_power
+            connection.snr = 10*np.log10(sig_power/noise)
+
             streamed_connections.append(connection)
         return streamed_connections
+
+
+
+
+
+
+
+
+
+
+

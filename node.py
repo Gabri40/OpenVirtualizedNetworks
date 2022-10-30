@@ -1,4 +1,6 @@
+
 import signal_information
+import lightpath
 
 class Node(object):
     def __init__(self, node_dict):
@@ -31,7 +33,6 @@ class Node(object):
         if len(path) > 1:
             line_label = path[:2]
             linestr=""
-            # print(linestr.join(line_label))
             line = self.successive[linestr.join(line_label)] #  line_label = path[:2] da una list
             signal_information.next()
             signal_information = line.propagate(signal_information,busy)
