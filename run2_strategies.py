@@ -23,7 +23,7 @@ print(network.weighted_paths)
 # bit rates calculating the overall average. Also calculate the total capacity
 # allocated into the network. Compare the three results obtained for the
 # three different transceiver strategies.
-# best="snr"
+
 
 nodes = list(network.nodes.keys())
 connections = []
