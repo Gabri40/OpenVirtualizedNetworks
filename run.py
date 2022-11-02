@@ -1,28 +1,30 @@
 from random import shuffle
 from network import *
 
+# -------------------
+# USATO FINO AL LAB 5
+# -------------------
+
 
 # ------------------------------------------------------------ CREATE NETWORK FROM JSON
 network = Network('nodes.json')
 # network = Network('262459.json')
 network.connect()
-# print(network.lines)
+print(len(network.lines))
 
 # ------------------------------------------------------------ DRAW
-# network.draw()
+network.draw()
 
 
 
 # ------------------------------------------------------------ WEIGHTED PATH
 network.set_weighted_paths(1e-3)
 pd.set_option('display.max_columns', None)  # val or None
-pd.set_option('display.max_rows', 50)  # val or None
-pd.set_option('display.max_colwidth', 15)  # or 199
+# pd.set_option('display.max_rows', None)  # val or None
+pd.set_option('display.max_colwidth', 10)  # or 199
 print("\nWEIGHTED GRAPH")
 print(network.weighted_paths)
 
-print("\nEMPTY ROUTE SPACE")
-print(network.route_space)
 
 
 # ------------------------------------------------------------ STREAM
@@ -38,17 +40,19 @@ best="latency"
 nodes = list(network.nodes.keys())
 connections = []
 def_power = 1e-3
-for i in range(100):
+conn_n=100
+for i in range(conn_n):
     shuffle(nodes)
     conn = Connection(nodes[0], nodes[-1], def_power)
     connections.append(conn)
+
 
 latencies = []
 snrs = []
 streamed_connections = network.stream(connections,best)
 for connection in streamed_connections:
-    latencies.append(connection.latency)
-    snrs.append(connection.snr)
+    if connection.latency is not None: latencies.append(connection.latency)
+    if connection.snr > 0: snrs.append(connection.snr)
 
 if best=="latency":
     plt.hist(latencies,bins=10)
@@ -58,6 +62,21 @@ else:
     plt.hist(snrs,bins=10)
     plt.title("SNR Distribution")
     plt.show()
+
+
+
+# ------------------------------------------------------------ UPDATED ROUTE SPACE
+# Modify the methods propagate and stream in the class Network that
+# should use and update the attribute route space in order to consider the
+# channel occupancy for any path.
+# Run the last exercise of the previous set (Lab 4) with this new network
+# abstraction on a list of 100 randomly chosen connections.
+
+pd.set_option('display.max_columns', None)  # val or None
+pd.set_option('display.max_rows', None)  # val or None
+pd.set_option('display.max_colwidth', 10)  # or 199
+print("\nROUTE SPACE UPDATED")
+print(network.route_space)
 
 
 

@@ -26,8 +26,8 @@ class Line(object):
     def state(self): 
         return self._state
     @state.setter
-    def state(self,state): 
-        self._state=state
+    def state(self,state,channel): 
+        self._state[channel]=state
     
     def latency_generation(self):
         latency = self.length /(3e8 * 2 / 3)
