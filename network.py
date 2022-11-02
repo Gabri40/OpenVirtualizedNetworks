@@ -45,6 +45,8 @@ class Network(object):
 
         self._weighted_paths= None
         self._route_space=None
+        self._logger=pd.DataFrame({"epoch_time":[],"path":[],"channelID":[],"bitrate":[]})
+        self._logger_entry_count=0
 
         self.connect()
         self.set_weighted_paths(1e-3)
@@ -64,6 +66,10 @@ class Network(object):
     @property
     def route_space(self):
         return self._route_space
+
+    @property
+    def logger(self):
+        return self._logger
 
 
     # ------------------------------------------------------------ CONNECT
@@ -141,7 +147,6 @@ class Network(object):
             for label2 in node_labels:
                 if label1 != label2:
                     pairs.append(label1 + label2)
-                    columns =["path","latency","noise","snr"]
 
         df = pd.DataFrame()
         paths =[]
@@ -274,6 +279,7 @@ class Network(object):
 
 
                 self.update_route_space(path,channel)
+                self.update_logger(path,channel,connection.rb)
 
             else :
                 connection.latency=None
@@ -357,13 +363,27 @@ class Network(object):
                     self.route_space.loc[self.route_space.path==path, str(channel)]="occupied"
 
 
+    # ------------------------------------------------------------ UPDATE LOGGER
+    def update_logger(self,path,channel,bitrate):
+        # self._logger=pd.DataFrame({"epoch_time":[],"path":[],"channelID":[],"bitrate":[]})
+        # idk what epoch tims relates to so ill use increment ID
+        entry=[]
+        entry.append(self._logger_entry_count)
+        entry.append(path)
+        entry.append(channel)
+        entry.append(bitrate)
+        self._logger_entry_count+=1
+
+        self._logger.loc[len(self._logger.index)] = entry
+
+
+
 
     # ------------------------------------------------------------ CALCULATE BIT RATE
     # Implement a method calculate bit rate(path, strategy) in the Net-
     # work class that evaluates the bit rate Rb supported by a specific path
     # given the corresponding gsnr (in linear units) and the transceiver tech-
     # nology
-
     def calculate_bit_rate(self, lightpath, strategy):
         ber_t=0.001
         Rs = lightpath.Rs
@@ -403,6 +423,7 @@ class Network(object):
         return Rb
 
 
+    # ------------------------------------------------------------ UPGRADE TRAFFIC MATRIX
     # Add in the class
     # Network a method that creates and manages the connections given a
     # traffic matrix. This method chooses a random pair of source-destination
@@ -430,9 +451,9 @@ class Network(object):
         if btr == 0:
             mtx[A][B] = float('inf')
             return float('inf')
+
         mtx[A][B] -= btr
-        # if mtx[A][B]<0: print("EEEEEEEEE\nEEEEEEEEEEEEE\nEEEEEEEEEE\nEEEEEEEEEE\nEEEEEE")
-        # print(nodeA,nodeB,mtx[A][B])
+
         return mtx[A][B]
 
 

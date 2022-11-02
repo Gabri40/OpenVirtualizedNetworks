@@ -67,6 +67,8 @@ plt.xlabel('Gbps')
 plt.savefig('Plots/BitRateFullfixed_rate.png')
 plt.show()
 
+# print(network.logger)
+
 
 # --------------------------------------------------------------- FLEX RATE
 network_flex_rate = Network(json,"flex_rate")
@@ -92,6 +94,8 @@ plt.xlabel('Gbps')
 plt.title('BitRate Full Flex-Rate')
 plt.savefig('Plots/BitRateFullFlex_Rate.png')
 plt.show()
+
+# print(network_flex_rate.logger)
 
 
 # --------------------------------------------------------------- SHANNON RATE
@@ -120,17 +124,19 @@ plt.title('BitRate Full Shannon')
 plt.savefig('Plots/BitRateFullShannon.png')
 plt.show()
 
+# print(network_shannon.logger)
+
 
 # --------------------------------------------------------------- LAT & SNR DISTRIBUTION GRAPHS
-streamed_connections = network.stream(connections)
+streamed_connections = network.stream(connections,best)
 latencies = [connection.latency for connection in streamed_connections if connection.latency is not None]
 plt.hist(np.ma.masked_equal(latencies, 0), bins=25)
-plt.title('Latency Distribution NO STRATEGY')
+plt.title('Latency Distribution')
 plt.savefig('Plots/LatencyDistribution.png')
 plt.show()
 snrs=[connection.snr for connection in streamed_connections]
 plt.hist(np.ma.masked_equal(snrs, 0), bins=20)
-plt.title('SNR Dstribution  NO STRATEGY')
+plt.title('SNR Dstribution')
 plt.savefig('Plots/SNRDistribution.png')
 plt.show()
 
