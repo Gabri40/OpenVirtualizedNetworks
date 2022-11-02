@@ -57,6 +57,7 @@ class Line(object):
     @property
     def n_amplifiers(self):
         return self._n_amplifiers
+
     @n_amplifiers.setter
     def n_amplifiers(self, value):
         self._n_amplifiers = value
@@ -69,8 +70,9 @@ class Line(object):
         latency = self.length /(3e8 * 2 / 3)
         return latency
     
-    def noise_generation(self, signal_power):
-        noise=1e-9*signal_power*self.length
+    def noise_generation(self, lightpath):
+        # noise=1e-9*signal_power*self.length
+        noise = self.ase_generation() + self.nli_generation(lightpath.signal_power, lightpath.df, lightpath.Rs)
         return noise
     
     def probe(self, signal_information,busy=False):
@@ -80,7 +82,7 @@ class Line(object):
 
         # Update noise
         signal_power = signal_information.signal_power
-        noise = self.noise_generation(signal_power)
+        noise = self.noise_generation(lightpath)
         signal_information.add_noise(noise)
 
         # print("prop: "+str(self.label))
@@ -89,13 +91,17 @@ class Line(object):
         return signal_information
 
     def propagate(self, lightpath,busy=False):
+
+        sp = self.optimized_launch_power(self.eta_nli(lightpath.df, lightpath.Rs))
+        lightpath.set_signal_power(sp)
+
         # Update latency
         latency = self.latency_generation()
         lightpath.add_latency(latency)
 
         # Update noise
         signal_power = lightpath.signal_power
-        noise = self.noise_generation(signal_power)
+        noise = self.noise_generation(lightpath)
         lightpath.add_noise(noise)
 
         if busy: self._states[lightpath.channel]="occupied"
@@ -118,7 +124,7 @@ class Line(object):
         G = 10 ** (self._gain / 10)
         f = 193.414e12
         Bn = 12.5e9  # GHz
-        ASE = self.n_amplifiers * h * f * Bn * NF * (G - 1)
+        ASE = self._n_amplifiers * h * f * Bn * NF * (G - 1)
         return ASE
 
 
@@ -148,8 +154,8 @@ class Line(object):
 # Hint: start from the definition of the GSNR and introduce the expressions
 # of ASE and NLI power adopted
     def optimized_launch_power(self, eta):
-        F = 10 ** (self.noise_figure / 10)
-        G = 10 ** (self.gain / 10)
+        F = 10 ** (self._noise_figure / 10)
+        G = 10 ** (self._gain / 10)
         f0 = 193.414e12
         olp = ((F * f0 * h * G) / (2 * eta)) ** (1 / 3)
         return olp

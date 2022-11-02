@@ -99,7 +99,7 @@ class Network(object):
     def probe(self, signal_info):
         path = signal_info.path
         start_node = self.nodes[path[0]]
-        propagated_lightpath=start_node.propagate(signal_info)
+        propagated_lightpath=start_node.probe(signal_info)
         return propagated_lightpath
 
     def propagate(self, lightpath,busy=False):
@@ -313,7 +313,7 @@ class Network(object):
 
     def calculate_bit_rate(self, lightpath, strategy):
         ber_t=1e-3
-        Rs = 32e9
+        Rs = lightpath.Rs
         Bn=12.5e9
         path = lightpath.path
         path_key='->'.join(path[i:i + 1] for i in range(0, len(path), 1))
