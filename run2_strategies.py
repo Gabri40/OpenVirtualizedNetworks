@@ -2,8 +2,8 @@ from random import shuffle
 from network import *
 
 # ------------------------------------------------------------ WHICH JSON
-json="nodes.json"
-# json="262459.json"
+# json="nodes.json"
+json="262459.json"
 
 # ------------------------------------------------------------ DRAW
 network = Network(json)
@@ -25,6 +25,8 @@ print(network.weighted_paths)
 # three different transceiver strategies.
 
 
+
+# ------------------------------------------------------------ GENERATE CONNECTIONS
 nodes = list(network.nodes.keys())
 connections = []
 def_power = 1e-3

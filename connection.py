@@ -6,26 +6,26 @@ class Connection(object):
         self._latency = 0
         self._snr = 0
         self._rb=0
-    
+
     @property
     def input_node(self):
         return self._input_node
-    
+
     @property
     def output_node(self):
         return self._output_node
-    
+
     @property
     def signal_power(self):
         return self._signal_power
-    
+
     @property
     def latency(self):
         return self._latency
     @latency.setter
     def latency(self, latency):
         self._latency = latency
-    
+
     @property
     def snr(self):
         return self._snr

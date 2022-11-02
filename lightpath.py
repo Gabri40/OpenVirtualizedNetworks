@@ -6,6 +6,8 @@ class Lightpath(object):
         self._latency=0
         self._channel=channel
 
+        # print(self._signal_power)
+
         self.Rs = 32.0e9
         self.df = 50.0e9
 
@@ -17,7 +19,7 @@ class Lightpath(object):
     @property
     def signal_power(self):
         return self._signal_power
-  
+
     def set_signal_power(self, signal_power ):
         self._signal_power = signal_power
 
