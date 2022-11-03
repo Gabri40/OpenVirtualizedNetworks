@@ -5,11 +5,15 @@ from network import *
 # json="nodes.json"
 json="262459.json"
 
+pd.set_option('display.max_columns', None)  # any val for short, None for full display
+pd.set_option('display.max_rows', None)     # any val for short, None for full display
+pd.set_option('display.max_colwidth', 20)
+
 # ------------------------------------------------------------ DRAW
 network = Network(json)
 network.draw()
-print("\nWEIGHTED GRAPH")
-print(network.weighted_paths)
+# print("\nWEIGHTED GRAPH")
+# print(network.weighted_paths)
 
 
 

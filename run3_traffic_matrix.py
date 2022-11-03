@@ -10,7 +10,7 @@ json="262459.json"
 
 # ------------------------------------------------------------ DRAW
 network = Network(json)
-# network.draw()
+network.draw()
 print("\nWEIGHTED GRAPH")
 print(network.weighted_paths)
 
@@ -40,7 +40,7 @@ print(network.weighted_paths)
 
 
 sat_percent = 95
-request_n=100
+request_n=21
 
 
 # --------------------------------------------------------------- FIXED RATE

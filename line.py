@@ -23,6 +23,7 @@ class Line(object):
         self.Rs=32e9
         self.df=50e9
 
+
     @property
     def n_amplifiers(self):
         return self._n_amplifiers

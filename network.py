@@ -398,6 +398,7 @@ class Network(object):
         # print(gsnr_db)
         gsnr=gsnr_db
         gsnr = 10 ** (gsnr_db / 10)
+        # print(gsnr)
 
 
         if strategy == 'fixed_rate':
