@@ -127,15 +127,17 @@ class Network(object):
             n0 = nodes[node_label]
             x0 = n0.position[0]
             y0 = n0.position[1]
-            plt.plot(x0, y0, marker='o', color="blue", zorder=10) # graph nodes + name
+            plt.plot(x0, y0, marker='o', color="black", zorder=10) # graph nodes + name
             plt.text(x0 + 20, y0 + 20, node_label)
             for connected_node_label in n0.connected_nodes:
                 n1 = nodes[connected_node_label]
                 x1 = n1.position[0]
                 y1 = n1.position[1]
-                plt.plot([x0, x1],[y0, y1], color="cyan") # graph lines as straight edges
+                plt.plot([x0, x1],[y0, y1], color="black") # graph lines as straight edges
         plt.title('TOPOLOGY')
+        plt.savefig('Plots/Topology.png',transparent=True)
         plt.show()
+
 
 
     # ------------------------------------------------------------ WEIGHTED PATH

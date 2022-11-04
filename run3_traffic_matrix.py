@@ -114,12 +114,12 @@ while 1:
 # print(network.logger)
 
 
-plt.plot(MsFix, saturationFix)
+plt.plot(MsFix, saturationFix,color="black")
 plt.title('Saturation Fixed-Rate')
-plt.savefig('Plots/M_fixed_rate.png')
+plt.savefig('Plots/M_fixed_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
-plt.grid(linestyle='-', linewidth=0.5)
+
 plt.show()
 
 
@@ -190,12 +190,12 @@ while 1:
 # print(network.logger)
 
 
-plt.plot(Msflex, saturationflex)
+plt.plot(Msflex, saturationflex,color="black")
 plt.title('Saturation Flex-Rate')
-plt.savefig('Plots/M_flex_rate.png')
+plt.savefig('Plots/M_flex_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
-plt.grid(linestyle='-', linewidth=0.5)
+
 plt.show()
 
 
@@ -268,27 +268,27 @@ while 1:
 # print(network.logger)
 
 
-plt.plot(Msshan, saturationshan)
+plt.plot(Msshan, saturationshan,color="black")
 plt.title('Saturation Shannon-Rate')
-plt.savefig('Plots/M_shannon_rate.png')
+plt.savefig('Plots/M_shannon_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
-plt.grid(linestyle='-', linewidth=0.5)
+
 plt.show()
 
 
 
 
 
-plt.plot(MsFix, saturationFix, label='fixed-rate')
-plt.plot(Msflex, saturationflex, label='flex-rate')
-plt.plot(Msshan, saturationshan, label='shannon')
+plt.plot(MsFix, saturationFix, label='fixed-rate',color="white")
+plt.plot(Msflex, saturationflex, label='flex-rate',color="#737373")
+plt.plot(Msshan, saturationshan, label='shannon',color="black")
 plt.xlabel('M')
 plt.ylabel('% of unsatisfied requests')
-plt.grid(linestyle='-', linewidth=0.5)
+
 plt.legend(loc='lower right')
 plt.title('Saturation Parameter')
-plt.savefig('Plots/M_all.png')
+plt.savefig('Plots/M_all.png',transparent=True)
 plt.show()
 
 

@@ -55,20 +55,20 @@ streamed_connections_fixed_rate = network.stream(conn_fixed, best)
 
 snrs = [connection.snr for connection in streamed_connections_fixed_rate]
 snrs_ = np.ma.masked_equal(snrs, 0)
-plt.hist(snrs_, bins=20)
+plt.hist(snrs_, bins=20,color="black")
 
 plt.title('SNR Distribution Full fixed-rate')
 plt.xlabel('dB')
-plt.savefig('Plots/SNRDistributionFullfixed_rate.png')
+plt.savefig('Plots/SNRDistributionFullfixed_rate.png',transparent=True)
 plt.show()
 
 bit_rate_fixed_rate = [connection.rb for connection in streamed_connections_fixed_rate]
 brfr = np.ma.masked_equal(bit_rate_fixed_rate, 0)
-plt.hist(brfr, bins=20,label='fixed-rate')
+plt.hist(brfr, bins=20,label='fixed-rate',color="black")
 
 plt.title('BitRate Full fixed-rate')
 plt.xlabel('Gbps')
-plt.savefig('Plots/BitRateFullfixed_rate.png')
+plt.savefig('Plots/BitRateFullfixed_rate.png',transparent=True)
 plt.show()
 
 # print(network.logger)
@@ -83,20 +83,20 @@ streamed_connections_flex_rate = network_flex_rate.stream(conn_flex, best)
 
 snrs = [connection.snr for connection in streamed_connections_flex_rate]
 snrs_ = np.ma.masked_equal(snrs, 0)
-plt.hist(snrs_, bins=20)
+plt.hist(snrs_, bins=20,color="black")
 
 plt.title('SNR Distribution Full flex-rate')
 plt.xlabel('dB')
-plt.savefig('Plots/SNRDistributionFullflex_rate.png')
+plt.savefig('Plots/SNRDistributionFullflex_rate.png',transparent=True)
 plt.show()
 
 bit_rate_flex_rate = [connection.rb for connection in streamed_connections_flex_rate]
 brfr = np.ma.masked_equal(bit_rate_flex_rate, 0)
-plt.hist(brfr, bins=20, label='flex_rate')
+plt.hist(brfr, bins=20, label='flex_rate',color="black")
 
 plt.xlabel('Gbps')
 plt.title('BitRate Full Flex-Rate')
-plt.savefig('Plots/BitRateFullFlex_Rate.png')
+plt.savefig('Plots/BitRateFullFlex_Rate.png',transparent=True)
 plt.show()
 
 # print(network_flex_rate.logger)
@@ -111,21 +111,21 @@ streamed_connections_shannon = network_shannon.stream(conn_shannon, best)
 
 snrs = [connection.snr for connection in streamed_connections_shannon]
 snrs_ = np.ma.masked_equal(snrs, 0)
-plt.hist(snrs_, bins=20)
+plt.hist(snrs_, bins=20,color="black")
 
 plt.title('SNR Distribution Full Shannon')
 plt.xlabel('dB')
-plt.savefig('Plots/SNRDistributionFullshannon.png')
+plt.savefig('Plots/SNRDistributionFullshannon.png',transparent=True)
 plt.show()
 
 bit_rate_shannon = [connection.rb for connection in streamed_connections_shannon]
 brs = np.ma.masked_equal(bit_rate_shannon, 0)
 
-plt.hist(brs,bins=20,label='shannon')
+plt.hist(brs,bins=20,label='shannon',color="black")
 
 plt.xlabel('Gbps')
 plt.title('BitRate Full Shannon')
-plt.savefig('Plots/BitRateFullShannon.png')
+plt.savefig('Plots/BitRateFullShannon.png',transparent=True)
 plt.show()
 
 # print(network_shannon.logger)
@@ -134,14 +134,14 @@ plt.show()
 # --------------------------------------------------------------- LAT & SNR DISTRIBUTION GRAPHS
 streamed_connections = network.stream(connections,best)
 latencies = [connection.latency for connection in streamed_connections if connection.latency is not None]
-plt.hist(np.ma.masked_equal(latencies, 0), bins=25)
+plt.hist(np.ma.masked_equal(latencies, 0), bins=25,color="black")
 plt.title('Latency Distribution')
-plt.savefig('Plots/LatencyDistribution.png')
+plt.savefig('Plots/LatencyDistribution.png',transparent=True)
 plt.show()
 snrs=[connection.snr for connection in streamed_connections]
-plt.hist(np.ma.masked_equal(snrs, 0), bins=20)
+plt.hist(np.ma.masked_equal(snrs, 0), bins=20,color="black")
 plt.title('SNR Dstribution')
-plt.savefig('Plots/SNRDistribution.png')
+plt.savefig('Plots/SNRDistribution.png',transparent=True)
 plt.show()
 
 
