@@ -8,11 +8,15 @@ from network import *
 json="nodes.json"
 json="262459.json"
 
+pd.set_option('display.max_columns', None)  # any val for short, None for full display
+pd.set_option('display.max_rows', 20)     # any val for short, None for full display
+pd.set_option('display.max_colwidth', 10)
+
 # ------------------------------------------------------------ DRAW
 network = Network(json)
-network.draw()
+# network.draw()
 print("\nWEIGHTED GRAPH")
-print(network.weighted_paths)
+# print(network.weighted_paths)
 
 
 
@@ -40,7 +44,7 @@ print(network.weighted_paths)
 
 
 sat_percent = 95
-request_n=21
+request_n=100
 
 
 # --------------------------------------------------------------- FIXED RATE
@@ -56,7 +60,7 @@ MsFix = []
 
 M = 1
 while 1:
-    print(M)
+    print("\n\nITERATION ",M,"----------------------------------------")
     # Assume a uniform distribution: all node pair requests always the same bit rate
     # of 100 * M Gbps, where M is an increasing integer number (1, 2, 3, ...)
     traffic_matrix = np.ones((n_node, n_node)) * 100 * M
@@ -102,10 +106,12 @@ while 1:
 
     if sat > sat_percent:
         break
-    print("\n")
     M += 1
 
-    # print(network.route_space)
+#     print("\nCURRENT ROUTE SPACE")
+#     print(network.route_space)
+# print("\nLOGGER")
+# print(network.logger)
 
 
 plt.plot(MsFix, saturationFix)
@@ -131,7 +137,7 @@ Msflex = []
 
 M = 1
 while 1:
-    print(M)
+    print("\n\nITERATION ",M,"----------------------------------------")
     # Assume a uniform distribution: all node pair requests always the same bit rate
     # of 100 * M Gbps, where M is an increasing integer number (1, 2, 3, ...)
     traffic_matrix = np.ones((n_node, n_node)) * 100 * M
@@ -176,10 +182,12 @@ while 1:
 
     if sat > sat_percent:
         break
-    print("\n")
     M += 1
 
-    # print(netfixed.route_space)
+#     print("\nCURRENT ROUTE SPACE")
+#     print(network.route_space)
+# print("\nLOGGER")
+# print(network.logger)
 
 
 plt.plot(Msflex, saturationflex)
@@ -205,7 +213,7 @@ Msshan = []
 
 M = 1
 while 1:
-    print(M)
+    print("\n\nITERATION ",M,"----------------------------------------")
     # Assume a uniform distribution: all node pair requests always the same bit rate
     # of 100 * M Gbps, where M is an increasing integer number (1, 2, 3, ...)
     traffic_matrix = np.ones((n_node, n_node)) * 100 * M
@@ -252,10 +260,12 @@ while 1:
 
     if sat > sat_percent:
         break
-    print("\n")
     M += 1
 
-    # print(netshannon.route_space)
+#     print("\nCURRENT ROUTE SPACE")
+#     print(network.route_space)
+# print("\nLOGGER")
+# print(network.logger)
 
 
 plt.plot(Msshan, saturationshan)

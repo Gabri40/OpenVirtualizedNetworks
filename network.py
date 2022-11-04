@@ -200,7 +200,13 @@ class Network(object):
         available_paths = []
         for path in all_paths:
             if "free" in self.route_space.loc[self.route_space.path==path].T.values[1:]:
-                available_paths.append(path)
+
+                # se almeno una delle linee del path non e in servizio il path non va bene
+                lines_set=self.path_to_lines(path)
+                in_serv= [self.lines[line].in_service for line in lines_set]
+                if 0 not in in_serv:
+                    available_paths.append(path)
+
         return available_paths
 
     def find_best_snr(self,start,end):
@@ -458,8 +464,10 @@ class Network(object):
         return mtx[A][B]
 
 
-
-
-
-
+    # ------------------------------------------------------------ STRONG FAILURE
+    # allows to emulate a fiber cut on a link. This method receives a single
+    # label related to a line instance and sets the attribute in service of the
+    # corresponding object to 0.
+    def strong_failure(self,line_laber):
+        self.lines[line_laber].fail_line()
 
