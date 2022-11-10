@@ -143,7 +143,7 @@ class Line(object):
     def nli_generation(self, signal_power, dfp, Rsp):
         Bn = 12.5e9  # GHz
         eta_nli = self.eta_nli(dfp, Rsp)
-        nli = (signal_power ** 3) * eta_nli * self._n_amplifiers * Bn
+        nli = (signal_power ** 3) * eta_nli * (self._n_amplifiers-2) * Bn
         # print(nli)
         return nli
     def eta_nli(self, dfp, Rsp):

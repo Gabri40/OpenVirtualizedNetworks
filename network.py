@@ -127,8 +127,11 @@ class Network(object):
             n0 = nodes[node_label]
             x0 = n0.position[0]
             y0 = n0.position[1]
-            plt.plot(x0, y0, marker='o', color="black", zorder=10) # graph nodes + name
-            plt.text(x0 + 20, y0 + 20, node_label)
+            plt.plot(x0, y0, marker='o', color="black", zorder=12) # graph nodes + name
+            if node_label in ["A","E","C"]:
+                plt.text((x0 + 20000), y0 + 2000, node_label)
+            else :
+                plt.text(x0 - 25000, y0 - 50000, node_label)
             for connected_node_label in n0.connected_nodes:
                 n1 = nodes[connected_node_label]
                 x1 = n1.position[0]

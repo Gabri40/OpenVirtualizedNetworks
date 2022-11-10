@@ -8,7 +8,7 @@ from network import *
 
 # ------------------------------------------------------------ CREATE NETWORK FROM JSON
 network = Network('nodes.json')
-# network = Network('262459.json')
+network = Network('262459.json')
 network.connect()
 print(len(network.lines))
 
@@ -73,7 +73,7 @@ else:
 # abstraction on a list of 100 randomly chosen connections.
 
 pd.set_option('display.max_columns', None)  # val or None
-pd.set_option('display.max_rows', None)  # val or None
+# pd.set_option('display.max_rows', None)  # val or None
 pd.set_option('display.max_colwidth', 10)  # or 199
 print("\nROUTE SPACE UPDATED")
 print(network.route_space)

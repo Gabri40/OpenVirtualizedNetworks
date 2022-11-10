@@ -43,7 +43,7 @@ print("\nWEIGHTED GRAPH")
 
 
 
-sat_percent = 95
+sat_percent = 99
 request_n=100
 
 
@@ -66,17 +66,18 @@ while 1:
     traffic_matrix = np.ones((n_node, n_node)) * 100 * M
     for i in range(n_node): traffic_matrix[i][i] = 0
     # print(traffic_matrix)
-    # print(network.lines.keys())
+    # lines=list(network._lines.keys())
+    # print(lines)
+    # print("CE" in network._lines.keys())
 
     elements = list(itertools.permutations(network.nodes.keys(), 2))
     for e in elements:  # remove the diagonal : A-A , B-B , C-C , ...
-        if e[0] == e[1] or str(e[0])+str(e[1]) not in network._lines.keys(): # se non e nella topologia non serve
+        # print(e[0]+e[1])
+        # print(e)
+        if e[0] == e[1]:
             elements.remove(e)
-            i=nodes_list.index(e[0])
-            j=nodes_list.index(e[1])
-            traffic_matrix[i][j] = 0
             # print(e)
-    # print(elements)
+        # print(elements)
     n_elem = len(elements)
 
     # avendo lista di tutte possibili connessioni nodo-nodo ne sceglie 100
@@ -89,8 +90,8 @@ while 1:
         if (val==0)|(val == np.inf):
             elements.remove(el)
 
-        # print(traffic_matrix)
-        # print()
+        print(traffic_matrix)
+        print()
 
     sat = 0
     for row in traffic_matrix:
@@ -116,7 +117,7 @@ while 1:
 
 plt.plot(MsFix, saturationFix,color="black")
 plt.title('Saturation Fixed-Rate')
-plt.savefig('Plots/M_fixed_rate.png',transparent=True)
+# plt.savefig('Plots/M_fixed_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
 
@@ -147,11 +148,8 @@ while 1:
 
     elements = list(itertools.permutations(netfixed.nodes.keys(), 2))
     for e in elements:  # remove the diagonal : A-A , B-B , C-C , ...
-        if e[0] == e[1] or str(e[0])+str(e[1]) not in netfixed._lines.keys(): # se non e nella topologia non serve
+        if e[0] == e[1] :
             elements.remove(e)
-            i=nodes_list.index(e[0])
-            j=nodes_list.index(e[1])
-            traffic_matrix[i][j] = 0
             # print(e)
     # print(elements)
     n_elem = len(elements)
@@ -165,8 +163,9 @@ while 1:
         val = netfixed.upgrade_traffic_matrix(traffic_matrix, el[0], el[1]) # update della tfm rimuovendo br
         if (val==0)|(val == np.inf):
             elements.remove(el)
-        # print(traffic_matrix)
-        # print()
+
+        print(traffic_matrix)
+        print()
 
     sat = 0
     for row in traffic_matrix:
@@ -192,7 +191,7 @@ while 1:
 
 plt.plot(Msflex, saturationflex,color="black")
 plt.title('Saturation Flex-Rate')
-plt.savefig('Plots/M_flex_rate.png',transparent=True)
+# plt.savefig('Plots/M_flex_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
 
@@ -223,11 +222,8 @@ while 1:
 
     elements = list(itertools.permutations(netshannon.nodes.keys(), 2))
     for e in elements:  # remove the diagonal : A-A , B-B , C-C , ...
-        if e[0] == e[1] or str(e[0])+str(e[1]) not in netshannon._lines.keys(): # se non e nella topologia non serve
+        if e[0] == e[1] : #
             elements.remove(e)
-            i=nodes_list.index(e[0])
-            j=nodes_list.index(e[1])
-            traffic_matrix[i][j] = 0
             # print(e)
     # print(elements)
     n_elem = len(elements)
@@ -243,8 +239,8 @@ while 1:
         if (val==0)|(val == np.inf):
             elements.remove(el)
 
-        # print(traffic_matrix)
-        # print()
+        print(traffic_matrix)
+        print()
 
     sat = 0
     for row in traffic_matrix:
@@ -270,7 +266,7 @@ while 1:
 
 plt.plot(Msshan, saturationshan,color="black")
 plt.title('Saturation Shannon-Rate')
-plt.savefig('Plots/M_shannon_rate.png',transparent=True)
+# plt.savefig('Plots/M_shannon_rate.png',transparent=True)
 plt.xlabel('M')
 plt.ylabel('saturation')
 
@@ -280,7 +276,7 @@ plt.show()
 
 
 
-plt.plot(MsFix, saturationFix, label='fixed-rate',color="white")
+plt.plot(MsFix, saturationFix, label='fixed-rate',color="blue")
 plt.plot(Msflex, saturationflex, label='flex-rate',color="#737373")
 plt.plot(Msshan, saturationshan, label='shannon',color="black")
 plt.xlabel('M')
@@ -288,7 +284,7 @@ plt.ylabel('% of unsatisfied requests')
 
 plt.legend(loc='lower right')
 plt.title('Saturation Parameter')
-plt.savefig('Plots/M_all.png',transparent=True)
+# plt.savefig('Plots/M_all.png',transparent=True)
 plt.show()
 
 
