@@ -19,8 +19,8 @@ The concepts of network planning, management and control will be introduced as a
 -	Python language and networking library 
 -	GitHub-based software development 
 -	Network management based of the infrastructure digital twin
-        - Abstraction of optical network elements 
-        - Software-defined-networking principles
+-       Abstraction of optical network elements 
+-       Software-defined-networking principles
 -       SW Abstraction of network elements in a disaggregated optical networks 
 -       SW Abstraction of data transport in open optical networks
 -	5G networking principles: hardware and network architecture.
