@@ -1,7 +1,10 @@
-# OVN
-The course aims at giving the fundamental skills on the basics of digital communications and networking enabling the modern society that is based on the Internet connection, so are fundamental concepts exploited by any engineering filed. 
+# Open and Virtualized Networks
 
-Will introduce **virtualized management of modern networks based on the physical layer digital twin** allowing open infrastructure sharing based on software defined networking. 
+!! Check the [digital twin presentation](ovn_presentation.pdf)
+
+The course aims at giving the fundamental skills on the basics of digital communications and networking enabling the modern society that is based on the Internet connection, so are fundamental concepts exploited by any engineering filed.
+
+Will introduce **virtualized management of modern networks based on the physical layer digital twin** allowing open infrastructure sharing based on software defined networking.
 
 - The first part of the course will convey the needed background on digital communications and networking to enable full understanding of all concepts conveyed by the course to all students independently of the specific engineering fields. To enable a full understanding of these concepts hands-on exercise based on Python code will be part of the course.
 
@@ -9,19 +12,19 @@ Will introduce **virtualized management of modern networks based on the physical
 
 - The third part of the course will be focused on the evolution of wireless cellular networking toward 5G and the use of the artificial intelligence in networking will be briefly summarized.
 
-The teaching method will follow an application-oriented introduction of concepts. To this purpose, students will be required to use provided Python code to practically solve assignments (firs course part)  and develop Phyton module to build and use a simple network digital twin.
+The teaching method will follow an application-oriented introduction of concepts. To this purpose, students will be required to use provided Python code to practically solve assignments (firs course part) and develop Phyton module to build and use a simple network digital twin.
 
 The concepts of network planning, management and control will be introduced as application examples
 
-
 ### Course topics
--	Fundamentals of digital communications and networking 
--	Python language and networking library 
--	GitHub-based software development 
--	Network management based of the infrastructure digital twin
-- Abstraction of optical network elements 
+
+- Fundamentals of digital communications and networking
+- Python language and networking library
+- GitHub-based software development
+- Network management based of the infrastructure digital twin
+- Abstraction of optical network elements
 - Software-defined-networking principles
-- SW Abstraction of network elements in a disaggregated optical networks 
+- SW Abstraction of network elements in a disaggregated optical networks
 - SW Abstraction of data transport in open optical networks
--	5G networking principles: hardware and network architecture.
--	Artificial intelligence principles and networking explotation
+- 5G networking principles: hardware and network architecture.
+- Artificial intelligence principles and networking explotation
