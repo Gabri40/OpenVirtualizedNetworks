@@ -1,6 +1,6 @@
 # Open and Virtualized Networks
 
-!! Check the [digital twin presentation](ovn_presentation.pdf)
+!! Check the [Digital Twin Simulation report](ovn_presentation.pdf). Score: 30/30
 
 The course aims at giving the fundamental skills on the basics of digital communications and networking enabling the modern society that is based on the Internet connection, so are fundamental concepts exploited by any engineering filed.
 
